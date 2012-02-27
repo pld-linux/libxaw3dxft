@@ -6,7 +6,7 @@ Summary:	Extended version of Xaw3d
 #Summary(pl.UTF-8):	-
 Name:		libxaw3dxft
 Version:	1.3.3
-Release:	0.1
+Release:	1
 License:	MIT
 Group:		X11/Libraries
 Source0:	http://downloads.sourceforge.net/sf-xpaint/%{name}-%{version}.tar.bz2
