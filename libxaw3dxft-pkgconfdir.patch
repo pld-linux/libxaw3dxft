@@ -1,0 +1,14 @@
+--- libxaw3dxft-1.3.3/Makefile.am~	2012-02-27 11:36:25.248340970 +0100
++++ libxaw3dxft-1.3.3/Makefile.am	2012-02-27 11:41:34.505021589 +0100
+@@ -68,9 +68,9 @@
+ 	-rmdir X11
+ 
+ install-exec-hook:
+-	-mkdir -p $(DESTDIR)/usr/lib/pkgconfig
++	-mkdir -p $(DESTDIR)$(libdir)/pkgconfig
+ 	cat libxaw3dxft.pc.in | sed -e "/VERSION/s//$(VERSION)/" > libxaw3dxft.pc
+-	/bin/cp -p libxaw3dxft.pc $(DESTDIR)/usr/lib/pkgconfig
++	/bin/cp -p libxaw3dxft.pc $(DESTDIR)$(libdir)/pkgconfig
+ 	rm -f libxaw3dxft.pc
+ 
+ # -version-info current:revision:age

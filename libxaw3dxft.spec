@@ -6,12 +6,13 @@ Summary:	Extended version of Xaw3d
 #Summary(pl.UTF-8):	-
 Name:		libxaw3dxft
 Version:	1.3.3
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Libraries
 Source0:	http://downloads.sourceforge.net/sf-xpaint/%{name}-%{version}.tar.bz2
 # Source0-md5:	d0bafeae76f3e50dbdce3e91bd149697
 Patch0:		%{name}-link.patch
+Patch1:		%{name}-pkgconfdir.patch
 URL:		http://sourceforge.net/projects/sf-xpaint/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -61,6 +62,7 @@ Statyczna biblioteka %{name}.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -78,8 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%{__mv} $RPM_BUILD_ROOT/usr/lib/pkgconfig $RPM_BUILD_ROOT%{_libdir}
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libXaw3dxft.la
 
