@@ -2,8 +2,8 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
 #
-Summary:	Extended version of Xaw3d
-#Summary(pl.UTF-8):	-
+Summary:	Extended version of Xaw3d widgets library
+Summary(pl.UTF-8):	Rozszerzona wersja biblioteki widgetów Xaw3d
 Name:		libxaw3dxft
 Version:	1.3.3
 Release:	2
@@ -26,38 +26,44 @@ BuildRequires:	xorg-lib-libXt-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Xaw3dxft is an extended version of xaw3d with support for UTF8 input
-and UTF8 encoding of text, and rendering text with the Freetype
-library and Truetype fonts. It should be mostly compatible with the
-original xaw3d library, except for font management : everything using
-the old X11 core font routines should be replaced by their freetype
-equivalents.
+Xaw3dxft is an extended version of Xaw3d widgets library with support
+for UTF-8 input and UTF-8 encoding of text, and rendering text with
+the FreeType library and TrueType fonts. It should be mostly
+compatible with the original Xaw3d library, except for font
+management: everything using the old X11 core font routines should be
+replaced by their FreeType equivalents.
 
-#%description -l pl.UTF-8
+%description -l pl.UTF-8
+Xaw3dxft to rozszerzona wersja Xaw3d z obsługą wejścia UTF-8,
+kodowaniem tekstu UTF-8 oraz renderowaniem tekstu przy użyciu
+biblioteki FreeType z fontami TrueType. Powinna być w większości
+zgodna z oryginalną biblioteką Xaw3d z wyjątkiem zarządzania fontami:
+wszystko wykorzystujące stare procedury obsługi fontów X11 powinny być
+zastąpione odpowiednikami wykorzystującymi z FreeType.
 
 %package devel
-Summary:	Header files for %{name} library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki %{name}
+Summary:	Header files for Xaw3dxft library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Xaw3dxft
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files for %{name} library.
+Header files for Xaw3dxft library.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki %{name}.
+Pliki nagłówkowe biblioteki Xaw3dxft.
 
 %package static
-Summary:	Static %{name} library
-Summary(pl.UTF-8):	Statyczna biblioteka %{name}
+Summary:	Static Xaw3dxft library
+Summary(pl.UTF-8):	Statyczna biblioteka Xaw3dxft
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
-Static %{name} library.
+Static Xaw3dxft library.
 
 %description static -l pl.UTF-8
-Statyczna biblioteka %{name}.
+Statyczna biblioteka Xaw3dxft.
 
 %prep
 %setup -q
@@ -100,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc ChangeLog
 %attr(755,root,root) %{_libdir}/libXaw3dxft.so
 %{_includedir}/X11/Xaw3dxft
-%{_pkgconfigdir}/%{name}.pc
+%{_pkgconfigdir}/libxaw3dxft.pc
 
 %if %{with static_libs}
 %files static
