@@ -5,24 +5,25 @@
 Summary:	Extended version of Xaw3d widgets library
 Summary(pl.UTF-8):	Rozszerzona wersja biblioteki widgetów Xaw3d
 Name:		libxaw3dxft
-Version:	1.3.3
-Release:	2
+Version:	1.6.2c
+Release:	1
 License:	MIT
 Group:		X11/Libraries
-Source0:	http://downloads.sourceforge.net/sf-xpaint/%{name}-%{version}.tar.bz2
-# Source0-md5:	d0bafeae76f3e50dbdce3e91bd149697
-Patch0:		%{name}-link.patch
-Patch1:		%{name}-pkgconfdir.patch
+Source0:	http://downloads.sourceforge.net/sf-xpaint/libXaw3dXft-%{version}.tar.bz2
+# Source0-md5:	eaf7638fad4016abad4a3116485c8e67
 URL:		http://sourceforge.net/projects/sf-xpaint/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libtool
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXmu-devel
 BuildRequires:	xorg-lib-libXpm-devel
 BuildRequires:	xorg-lib-libXt-devel
+BuildRequires:	xorg-util-util-macros >= 1.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -44,8 +45,14 @@ zastąpione odpowiednikami wykorzystującymi z FreeType.
 %package devel
 Summary:	Header files for Xaw3dxft library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Xaw3dxft
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	fontconfig-devel
+Requires:	xorg-lib-libX11-devel
+Requires:	xorg-lib-libXext-devel
+Requires:	xorg-lib-libXft-devel
+Requires:	xorg-lib-libXmu-devel
+Requires:	xorg-lib-libXt-devel
 
 %description devel
 Header files for Xaw3dxft library.
@@ -56,7 +63,7 @@ Pliki nagłówkowe biblioteki Xaw3dxft.
 %package static
 Summary:	Static Xaw3dxft library
 Summary(pl.UTF-8):	Statyczna biblioteka Xaw3dxft
-Group:		Development/Libraries
+Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
@@ -66,16 +73,17 @@ Static Xaw3dxft library.
 Statyczna biblioteka Xaw3dxft.
 
 %prep
-%setup -q
-%patch0 -p1
-%patch1 -p1
+%setup -q -n libXaw3dXft-%{version}
 
 %build
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
+	--enable-arrow-scrollbars \
+	--enable-gray-stipples \
 	--enable-multiplane-pixmaps \
 	%{!?with_static_libs:--disable-static}
 
@@ -97,13 +105,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS README
+%doc COPYING README
 %attr(755,root,root) %{_libdir}/libXaw3dxft.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libXaw3dxft.so.7
+%attr(755,root,root) %ghost %{_libdir}/libXaw3dxft.so.8
 
 %files devel
 %defattr(644,root,root,755)
-%doc ChangeLog
 %attr(755,root,root) %{_libdir}/libXaw3dxft.so
 %{_includedir}/X11/Xaw3dxft
 %{_pkgconfigdir}/libxaw3dxft.pc
