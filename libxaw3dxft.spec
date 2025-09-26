@@ -5,12 +5,12 @@
 Summary:	Extended version of Xaw3d widgets library
 Summary(pl.UTF-8):	Rozszerzona wersja biblioteki widgetów Xaw3d
 Name:		libxaw3dxft
-Version:	1.6.2c
+Version:	1.6.4
 Release:	1
 License:	MIT
 Group:		X11/Libraries
-Source0:	http://downloads.sourceforge.net/sf-xpaint/libXaw3dXft-%{version}.tar.bz2
-# Source0-md5:	eaf7638fad4016abad4a3116485c8e67
+Source0:	https://github.com/DaveFlater/libXaw3dXft/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	57130fb9ce5c9b7011635286011e890d
 URL:		http://sourceforge.net/projects/sf-xpaint/
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
