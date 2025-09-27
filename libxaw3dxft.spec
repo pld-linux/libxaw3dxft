@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	static_libs	# don't build static libraries
+%bcond_without	static_libs	# static library
 #
 Summary:	Extended version of Xaw3d widgets library
 Summary(pl.UTF-8):	Rozszerzona wersja biblioteki widgetów Xaw3d
@@ -9,21 +9,26 @@ Version:	1.6.4
 Release:	1
 License:	MIT
 Group:		X11/Libraries
+#Source0Download: https://github.com/DaveFlater/libXaw3dXft/releases
+# TODO: 
+#Source0:	https://github.com/DaveFlater/libXaw3dXft/releases/download/v%{version}/%{name}-%{version}.tar.xz
 Source0:	https://github.com/DaveFlater/libXaw3dXft/archive/v%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	57130fb9ce5c9b7011635286011e890d
-URL:		http://sourceforge.net/projects/sf-xpaint/
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	automake
+URL:		https://github.com/DaveFlater/libXaw3dXft
+BuildRequires:	autoconf >= 2.64
+# dist-xz was introduced in 1.11
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
+BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXft-devel
 BuildRequires:	xorg-lib-libXmu-devel
 BuildRequires:	xorg-lib-libXpm-devel
 BuildRequires:	xorg-lib-libXt-devel
-BuildRequires:	xorg-util-util-macros >= 1.8
+BuildRequires:	xorg-proto-xproto-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,7 +82,7 @@ Statyczna biblioteka Xaw3dxft.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -97,6 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libXaw3dxft.la
 
+# packages as %doc (READMEs-old skipped)
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/libxaw3dxft
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -105,13 +113,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING README
+%doc AUTHORS COPYING ChangeLog README.md Xresources
 %attr(755,root,root) %{_libdir}/libXaw3dxft.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libXaw3dxft.so.8
+%ghost %{_libdir}/libXaw3dxft.so.8
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libXaw3dxft.so
+%{_libdir}/libXaw3dxft.so
 %{_includedir}/X11/Xaw3dxft
 %{_pkgconfigdir}/libxaw3dxft.pc
 
